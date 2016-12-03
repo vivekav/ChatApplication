@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -88,6 +89,18 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("room_name",((TextView)view).getText().toString());
                 intent.putExtra("user_name",name);
                 startActivity(intent);
+            }
+        });
+
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
+                String s = parent.getItemAtPosition(i).toString();
+                Intent intent=new Intent();
+                arrayAdapter.remove(s);
+                arrayAdapter.notifyDataSetChanged();
+                return false;
             }
         });
     }
