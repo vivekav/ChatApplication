@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -96,8 +97,7 @@ public class MainActivity extends AppCompatActivity {
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
-                String s = parent.getItemAtPosition(i).toString();
-                Intent intent=new Intent();
+               String s = parent.getItemAtPosition(i).toString();
                 arrayAdapter.remove(s);
                 arrayAdapter.notifyDataSetChanged();
                 return false;
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+builder.setCancelable(true);
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
