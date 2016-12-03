@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "638511888262",
+    "firebase_url": "https://chatapplication-45cbb.firebaseio.com",
+    "project_id": "chatapplication-45cbb",
+    "storage_bucket": "chatapplication-45cbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638511888262:android:6f5e5c3c4242dfab",
+        "android_client_info": {
+          "package_name": "vivek.felight.com.chatapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638511888262-stutpbutjid9g2dvqrs5tshpistcuu3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjwR6UetoaFsi7CRfj35pV-W8lZ8VEZKc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
