@@ -18,7 +18,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".RoomActivity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity">
+
+        </activity>
     </application>
 
 </manifest>
