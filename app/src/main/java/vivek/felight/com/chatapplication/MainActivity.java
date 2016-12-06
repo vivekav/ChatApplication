@@ -7,6 +7,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -129,4 +132,26 @@ builder.setCancelable(true);
         });
         builder.show();
     }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        super.onOptionsItemSelected(item);
+        switch(item.getItemId()){
+            case R.id.LogOut:
+                finish();
+                startActivity(new Intent(getBaseContext(),LoginActivity.class));
+                break;
+        }
+        return true;
+    }
+
 }

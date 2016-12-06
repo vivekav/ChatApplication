@@ -140,11 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog.show();
 
         Intent intent=new Intent(getBaseContext(),LoginActivity.class);
-        intent.putExtra("email",email);
-        intent.putExtra("pass",pass);
-
-        Intent intent1=new Intent(getBaseContext(),MainActivity.class);
-        intent1.putExtra("usernamelogin",inputusername);
+        intent.putExtra("usernamelogin",inputusername);
         firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -160,6 +156,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private boolean checkInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

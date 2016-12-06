@@ -99,8 +99,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(),"Logged In",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getBaseContext(),MainActivity.class));}
                 else {
-                    Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
+                    Toast.makeText(getBaseContext(), "Login failed. Please enter correct credentials", Toast.LENGTH_SHORT).show();
                 }
             }
         });
