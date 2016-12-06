@@ -87,7 +87,7 @@
         android:layout_alignBottom="@+id/tvview2"
         android:layout_toRightOf="@+id/tvview2"
         android:layout_toEndOf="@+id/tvview2"
-        android:id="@+id/tvlogin" />
+        android:id="@+id/tvlog" />
 
     <TextView
         android:text="Already Registered? Sign in"

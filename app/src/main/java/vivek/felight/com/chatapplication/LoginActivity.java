@@ -1,11 +1,13 @@
 package vivek.felight.com.chatapplication;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,11 +18,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginActivity extends AppCompatActivity {
 
-    TextView tvsignup;
-    EditText etloginmail, etloginpass;
-    Button btnlogin;
+    private TextView tvsignup;
+    private EditText etloginmail, etloginpass;
+    private Button btnlogin;
+    private ProgressDialog progressDialog;
+    private FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +40,15 @@ public class LoginActivity extends AppCompatActivity {
         tvsignup=(TextView)findViewById(R.id.tvsignup);
         etloginmail=(EditText)findViewById(R.id.etloginmail);
         etloginpass=(EditText)findViewById(R.id.etloginpass);
+        btnlogin=(Button)findViewById(R.id.btnSignIn);
+
+        progressDialog= new ProgressDialog(this);
+        firebaseAuth= FirebaseAuth.getInstance();
+
 
         tvsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 startActivity(new Intent(getBaseContext(),RegisterActivity.class));
             }
         });
@@ -61,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     private void userLogin() {
 
         String loginmail=etloginmail.getText().toString().trim();
@@ -74,13 +87,28 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this,"Please Enter Password",Toast.LENGTH_SHORT).show();
             return;}
 
-    }
+        progressDialog.setMessage("Logging In...");
+        progressDialog.show();
 
+        firebaseAuth.signInWithEmailAndPassword(loginmail,loginpass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    progressDialog.dismiss();
+                    finish();
+                    Toast.makeText(getBaseContext(),"Logged In",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getBaseContext(),MainActivity.class));}
+                else {
+                    Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            }
+        });
+    }
 
     private boolean checkInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
 }

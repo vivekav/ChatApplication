@@ -43,19 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnregister=(Button)findViewById(R.id.btnregister);
         etemail=(EditText)findViewById(R.id.etloginmail);
         etpass=(EditText)findViewById(R.id.etpass);
-        tvlogin=(TextView)findViewById(R.id.tvview2);
-
-        if(etinputname1.getText().toString().matches(""))
-        {etinputname1.setError("Input UserName");
-            return;}
-
-        if(etpass.getText().toString().matches(""))
-        {etpass.setError("Input Password");
-            return;}
-
-        if(etemail.getText().toString().matches(""))
-        {etemail.setError("Input Email");
-            return;}
+        tvlogin=(TextView)findViewById(R.id.tvlog);
 
         if(etpassmatch.getText().toString().compareTo(etpass.getText().toString())!=0)
             etpassmatch.setError("Should be same as password");
@@ -70,7 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
         tvlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getBaseContext(),LoginActivity.class));
+                finish();
+                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             }
         });
     }
@@ -149,12 +138,20 @@ public class RegisterActivity extends AppCompatActivity {
         //validation done
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
+
+        Intent intent=new Intent(getBaseContext(),LoginActivity.class);
+        intent.putExtra("email",email);
+        intent.putExtra("pass",pass);
+
+        Intent intent1=new Intent(getBaseContext(),MainActivity.class);
+        intent1.putExtra("usernamelogin",inputusername);
         firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progressDialog.dismiss();
                     Toast.makeText(RegisterActivity.this, "Registered Successfully",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
                 }
                 else {
                     progressDialog.dismiss();
